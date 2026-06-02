@@ -1,0 +1,7 @@
+.career-page { padding: 2rem 0 4rem; }
+.career-page__header { text-align: center; margin-bottom: 2rem; }
+.career-page__header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.career-page__header p { color: var(--text-secondary); font-size: 1.05rem; }
+.career-page__form { max-width: 650px; margin: 0 auto; padding: 2rem; }
+.career-page__row { display: flex; gap: 1rem; }
+@media (max-width: 768px) { .career-page__row { flex-direction: column; } }
