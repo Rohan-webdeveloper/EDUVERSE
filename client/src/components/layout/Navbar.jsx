@@ -62,19 +62,17 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Search bar (hide on landing) */}
-        {!isLanding && (
-          <form className="navbar__search" onSubmit={handleSearch}>
-            <FiSearch className="navbar__search-icon" />
-            <input
-              type="text"
-              placeholder="Search topics, subjects, exams..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="navbar__search-input"
-            />
-          </form>
-        )}
+        {/* Search bar (permanent on all pages) */}
+        <form className="navbar__search" onSubmit={handleSearch}>
+          <FiSearch className="navbar__search-icon" />
+          <input
+            type="text"
+            placeholder="Search topics, subjects, exams..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="navbar__search-input"
+          />
+        </form>
 
         {/* Desktop Nav Links */}
         <div className="navbar__links">
