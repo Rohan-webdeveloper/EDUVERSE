@@ -97,3 +97,40 @@ exports.upvoteDiscussion = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+// @desc    Update discussion
+// @route   PUT /api/community/posts/:id
+exports.updateDiscussion = async (req, res) => {
+  try {
+    const { title, content, tags, subject, exam, solved } = req.body;
+    const updateData = {};
+    if (title) updateData.title = title;
+    if (content) updateData.content = content;
+    if (tags) updateData.tags = tags;
+    if (subject) updateData.subject = subject;
+    if (exam) updateData.exam = exam;
+    if (solved !== undefined) updateData.isSolved = solved;
+
+    const discussion = await Discussion.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user.id },
+      updateData,
+      { new: true }
+    );
+    if (!discussion) return res.status(404).json({ success: false, message: 'Discussion not found or unauthorized' });
+    res.json({ success: true, discussion });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Delete discussion
+// @route   DELETE /api/community/posts/:id
+exports.deleteDiscussion = async (req, res) => {
+  try {
+    const discussion = await Discussion.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
+    if (!discussion) return res.status(404).json({ success: false, message: 'Discussion not found or unauthorized' });
+    res.json({ success: true, message: 'Discussion deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+
 // ─── Axios Instance ────────────────────────────────────────────────────────────
 const api = axios.create({
-  baseURL: '/api',
-  timeout: 15000,
+  baseURL: BASE_URL,
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -93,7 +95,7 @@ api.interceptors.response.use(
       }
 
       try {
-        const response = await axios.post('/api/auth/refresh', {
+        const response = await axios.post(`${BASE_URL}/auth/refresh`, {
           refreshToken,
         })
 
@@ -147,7 +149,7 @@ export const authAPI = {
   refresh: (refreshToken) => api.post('/auth/refresh', { refreshToken }),
   getMe: () => api.get('/auth/me'),
   updateProfile: (data) => api.put('/auth/profile', data),
-  googleLogin: () => (window.location.href = '/api/auth/google'),
+  googleLogin: () => (window.location.href = `${BASE_URL}/auth/google`),
   changePassword: (data) => api.put('/auth/change-password', data),
   forgotPassword: (email) => api.post('/auth/forgot-password', { email }),
   resetPassword: (data) => api.post('/auth/reset-password', data),

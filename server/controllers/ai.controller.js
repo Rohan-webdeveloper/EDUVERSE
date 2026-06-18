@@ -29,6 +29,7 @@ exports.generateNotes = async (req, res) => {
 
     res.json({ success: true, content, type: type || 'short' });
   } catch (error) {
+    console.error("AI controller error in generateNotes:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -43,6 +44,7 @@ exports.solveDoubt = async (req, res) => {
     const answer = await geminiService.solveDoubt({ question, subject, exam, level });
     res.json({ success: true, question, answer });
   } catch (error) {
+    console.error("AI controller error in solveDoubt:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -57,6 +59,7 @@ exports.generateRoadmap = async (req, res) => {
     const roadmap = await geminiService.generateRoadmap({ goal, duration: duration || '3 months', currentLevel, subjects });
     res.json({ success: true, goal, roadmap });
   } catch (error) {
+    console.error("AI controller error in generateRoadmap:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
@@ -75,6 +78,7 @@ exports.generateQuiz = async (req, res) => {
 
     res.json({ success: true, topic, questions, difficulty: difficulty || 'intermediate' });
   } catch (error) {
+    console.error("AI controller error in generateQuiz:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

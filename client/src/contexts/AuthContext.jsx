@@ -18,10 +18,12 @@ import {
 // ─── Context ───────────────────────────────────────────────────────────────────
 const AuthContext = createContext(null)
 
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+
 // ─── Axios instance for auth (avoids circular dep with main api.js) ────────────
 const authAxios = axios.create({
-  baseURL: '/api',
-  timeout: 15000,
+  baseURL: BASE_URL,
+  timeout: 60000,
   headers: { 'Content-Type': 'application/json' },
 })
 

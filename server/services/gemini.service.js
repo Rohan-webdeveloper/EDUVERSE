@@ -6,7 +6,13 @@ const getGenAI = () => {
   return genAI;
 };
 
-const getModel = () => getGenAI().getGenerativeModel({ model: 'gemini-1.5-flash' });
+const getModel = (jsonMode = false) => {
+  const options = { model: 'gemini-2.5-flash' };
+  if (jsonMode) {
+    options.generationConfig = { responseMimeType: 'application/json' };
+  }
+  return getGenAI().getGenerativeModel(options);
+};
 
 /**
  * Generate notes for a video/topic
@@ -90,6 +96,50 @@ Format as a comprehensive, well-structured Markdown document. Make it realistic 
 };
 
 /**
+ * Clean control characters ONLY inside string literals in a JSON string.
+ * Preserves structural newlines/tabs outside strings, but escapes them inside.
+ */
+const cleanRawControlChars = (jsonStr) => {
+  let result = '';
+  let inString = false;
+  let escape = false;
+  for (let i = 0; i < jsonStr.length; i++) {
+    const char = jsonStr[i];
+    if (escape) {
+      result += char;
+      escape = false;
+      continue;
+    }
+    if (char === '\\') {
+      result += char;
+      escape = true;
+      continue;
+    }
+    if (char === '"') {
+      inString = !inString;
+      result += char;
+      continue;
+    }
+    if (inString) {
+      if (char === '\n') {
+        result += '\\n';
+      } else if (char === '\r') {
+        result += '\\r';
+      } else if (char === '\t') {
+        result += '\\t';
+      } else if (char.charCodeAt(0) < 32) {
+        result += ''; // remove other control chars
+      } else {
+        result += char;
+      }
+    } else {
+      result += char;
+    }
+  }
+  return result;
+};
+
+/**
  * Generate quiz questions
  */
 const generateQuiz = async ({ topic, subject = '', difficulty = 'intermediate', numQuestions = 10, exam = '' }) => {
@@ -111,14 +161,18 @@ Return ONLY a valid JSON array (no markdown, no explanation) in this exact forma
 
 The correctAnswer is the index (0-3) of the correct option. Ensure questions are accurate and educational.`;
 
-  const model = getModel();
+  const model = getModel(true);
   const result = await model.generateContent(prompt);
   const text = result.response.text().trim();
   
-  // Parse JSON from response
-  const jsonMatch = text.match(/\[[\s\S]*\]/);
-  if (!jsonMatch) throw new Error('Failed to parse quiz questions');
-  return JSON.parse(jsonMatch[0]);
+  try {
+    return JSON.parse(cleanRawControlChars(text));
+  } catch (e) {
+    // Fallback: extract JSON array, clean it, and parse
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    if (!jsonMatch) throw new Error('Failed to parse quiz questions');
+    return JSON.parse(cleanRawControlChars(jsonMatch[0]));
+  }
 };
 
 /**
