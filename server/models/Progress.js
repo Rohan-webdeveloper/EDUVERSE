@@ -47,4 +47,6 @@ const progressSchema = new mongoose.Schema({
   }],
 }, { timestamps: true });
 
-module.exports = mongoose.model('Progress', progressSchema);
+const Progress = mongoose.model('Progress', progressSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(Progress, 'Progress');

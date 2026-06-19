@@ -124,8 +124,17 @@ export default function SearchPage() {
           )}
 
           <div className="search-page__layout">
+            {showFilters && (
+              <div className="search-page__backdrop" onClick={() => setShowFilters(false)} />
+            )}
             {/* Filter Sidebar */}
             <aside className={`search-page__sidebar ${showFilters ? 'search-page__sidebar--open' : ''}`}>
+              <div className="search-page__sidebar-header-mobile">
+                <h3>Filters</h3>
+                <button className="search-page__sidebar-close" onClick={() => setShowFilters(false)}>
+                  <FiX size={20} />
+                </button>
+              </div>
               <div className="search-page__filter-group">
                 <h4 className="search-page__filter-title"><FiChevronDown /> Exam</h4>
                 <div className="search-page__filter-options">

@@ -10,6 +10,7 @@ import { HiOutlineSparkles } from 'react-icons/hi'
 import toast from 'react-hot-toast'
 import api from '../services/api.js'
 import { useAuth } from '../contexts/AuthContext'
+import Navbar from '../components/layout/Navbar'
 import './CommunityPage.css'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -364,6 +365,20 @@ const DiscussionCard = ({ discussion, onUpvote, onOpen, currentUserId }) => {
             <Avatar name={discussion.author?.name} size={24} />
             <span>{discussion.author?.name}</span>
           </div>
+
+          <div className="comm-card-mobile-stats">
+            <button
+              className={`comm-upvote-btn-sm ${hasVoted ? 'comm-voted' : ''}`}
+              onClick={(e) => { e.stopPropagation(); onUpvote(discussion._id) }}
+              title="Upvote"
+            >
+              <FiThumbsUp size={12} />
+              <span>{discussion.upvotes}</span>
+            </button>
+            <span className="comm-card-time"><FiMessageSquare size={12} /> {discussion.answerCount}</span>
+            <span className="comm-card-time"><FiEye size={12} /> {discussion.views}</span>
+          </div>
+
           <span className="comm-card-time"><FiClock size={12} /> {timeAgo(discussion.createdAt)}</span>
         </div>
       </div>
@@ -386,6 +401,7 @@ export default function CommunityPage() {
   const [showAskModal, setShowAskModal] = useState(false)
   const [selectedDiscussion, setSelectedDiscussion] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [showMobileFilters, setShowMobileFilters] = useState(false)
   const PER_PAGE = 5
 
   // Load discussions from API
@@ -500,6 +516,8 @@ export default function CommunityPage() {
 
   return (
     <div className="comm-page">
+      <Navbar />
+
       {/* Header */}
       <div className="comm-hero">
         <div className="comm-hero-content">
@@ -520,14 +538,26 @@ export default function CommunityPage() {
       </div>
 
       <div className="comm-layout">
+        {/* Backdrop for Mobile Sidebar Drawer */}
+        {showMobileFilters && (
+          <div className="comm-sidebar-backdrop" onClick={() => setShowMobileFilters(false)} />
+        )}
+
         {/* Left Sidebar */}
-        <aside className="comm-sidebar">
+        <aside className={`comm-sidebar ${showMobileFilters ? 'comm-sidebar-open' : ''}`}>
+          <div className="comm-sidebar-mobile-header">
+            <h3>Filters</h3>
+            <button className="comm-sidebar-mobile-close" onClick={() => setShowMobileFilters(false)}>
+              <FiX size={20} />
+            </button>
+          </div>
+
           <div className="comm-sidebar-section">
             <h3 className="comm-sidebar-heading"><FiFilter size={14} /> Filter by Subject</h3>
             <div className="comm-filter-list">
-              <button className={`comm-filter-btn ${filterSubject === '' ? 'active' : ''}`} onClick={() => { setFilterSubject(''); setPage(1) }}>All Subjects</button>
+              <button className={`comm-filter-btn ${filterSubject === '' ? 'active' : ''}`} onClick={() => { setFilterSubject(''); setPage(1); setShowMobileFilters(false); }}>All Subjects</button>
               {SUBJECTS.map(s => (
-                <button key={s} className={`comm-filter-btn ${filterSubject === s ? 'active' : ''}`} onClick={() => { setFilterSubject(s === filterSubject ? '' : s); setPage(1) }}>{s}</button>
+                <button key={s} className={`comm-filter-btn ${filterSubject === s ? 'active' : ''}`} onClick={() => { setFilterSubject(s === filterSubject ? '' : s); setPage(1); setShowMobileFilters(false); }}>{s}</button>
               ))}
             </div>
           </div>
@@ -535,9 +565,9 @@ export default function CommunityPage() {
           <div className="comm-sidebar-section">
             <h3 className="comm-sidebar-heading"><FiBookOpen size={14} /> Filter by Exam</h3>
             <div className="comm-filter-list">
-              <button className={`comm-filter-btn ${filterExam === '' ? 'active' : ''}`} onClick={() => { setFilterExam(''); setPage(1) }}>All Exams</button>
+              <button className={`comm-filter-btn ${filterExam === '' ? 'active' : ''}`} onClick={() => { setFilterExam(''); setPage(1); setShowMobileFilters(false); }}>All Exams</button>
               {EXAMS.slice(0, 6).map(e => (
-                <button key={e} className={`comm-filter-btn ${filterExam === e ? 'active' : ''}`} onClick={() => { setFilterExam(e === filterExam ? '' : e); setPage(1) }}>{e}</button>
+                <button key={e} className={`comm-filter-btn ${filterExam === e ? 'active' : ''}`} onClick={() => { setFilterExam(e === filterExam ? '' : e); setPage(1); setShowMobileFilters(false); }}>{e}</button>
               ))}
             </div>
           </div>
@@ -546,7 +576,7 @@ export default function CommunityPage() {
             <h3 className="comm-sidebar-heading"><FiTrendingUp size={14} /> Popular Tags</h3>
             <div className="comm-popular-tags">
               {POPULAR_TAGS.map(tag => (
-                <button key={tag} className={`comm-tag-chip comm-tag-lg ${filterTag === tag ? 'active' : ''}`} onClick={() => handleTagClick(tag)}>
+                <button key={tag} className={`comm-tag-chip comm-tag-lg ${filterTag === tag ? 'active' : ''}`} onClick={() => { handleTagClick(tag); setShowMobileFilters(false); }}>
                   <FiHash size={10} /> {tag}
                 </button>
               ))}
@@ -567,6 +597,11 @@ export default function CommunityPage() {
               />
               {search && <button className="comm-search-clear" onClick={() => setSearch('')}><FiX /></button>}
             </div>
+            
+            <button className="comm-filter-toggle-btn" onClick={() => setShowMobileFilters(true)}>
+              <FiFilter size={15} /> Filters {(filterSubject || filterExam || filterTag) ? '•' : ''}
+            </button>
+
             <div className="comm-tabs">
               {[
                 { id: 'all', label: 'All' },

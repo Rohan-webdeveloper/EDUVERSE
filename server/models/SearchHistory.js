@@ -26,4 +26,6 @@ const searchHistorySchema = new mongoose.Schema({
 
 searchHistorySchema.index({ userId: 1, timestamp: -1 });
 
-module.exports = mongoose.model('SearchHistory', searchHistorySchema);
+const SearchHistory = mongoose.model('SearchHistory', searchHistorySchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(SearchHistory, 'SearchHistory');

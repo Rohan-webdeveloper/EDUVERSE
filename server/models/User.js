@@ -95,4 +95,6 @@ userSchema.methods.updateStreak = function () {
   }
 };
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(User, 'User');

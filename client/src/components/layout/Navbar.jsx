@@ -74,15 +74,12 @@ export default function Navbar() {
           />
         </form>
 
-        {/* Desktop Nav Links */}
-        <div className="navbar__links">
+        {/* Right Actions */}
+        <div className="navbar__actions">
           <Link to="/search" className="navbar__link">Explore</Link>
           <Link to="/community" className="navbar__link">Community</Link>
           {isAuthenticated && <Link to="/roadmap" className="navbar__link">Roadmap</Link>}
-        </div>
 
-        {/* Right Actions */}
-        <div className="navbar__actions">
           <button onClick={toggleTheme} className="navbar__icon-btn" aria-label="Toggle theme">
             {theme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
           </button>
@@ -129,7 +126,6 @@ export default function Navbar() {
           ) : (
             <div className="navbar__auth-btns">
               <Link to="/login" className="btn btn-ghost">Login</Link>
-              <Link to="/register" className="btn btn-primary navbar__cta">Start Free</Link>
             </div>
           )}
 
@@ -155,7 +151,6 @@ export default function Navbar() {
           ) : (
             <>
               <Link to="/login" className="navbar__mobile-link">Login</Link>
-              <Link to="/register" className="btn btn-primary" style={{margin: '0.5rem 1rem'}}>Get Started Free</Link>
             </>
           )}
         </div>

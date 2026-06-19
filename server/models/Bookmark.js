@@ -21,4 +21,6 @@ const bookmarkSchema = new mongoose.Schema({
 
 bookmarkSchema.index({ userId: 1, videoId: 1 }, { unique: true });
 
-module.exports = mongoose.model('Bookmark', bookmarkSchema);
+const Bookmark = mongoose.model('Bookmark', bookmarkSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(Bookmark, 'Bookmark');

@@ -1,0 +1,128 @@
+{
+  "User": [
+    {
+      "isActive": true,
+      "_id": "mock-user-1",
+      "name": "Rohan Student",
+      "email": "student@eduverse.ai",
+      "password": "rohan@123",
+      "role": "student",
+      "preferences": {
+        "exam": "JEE",
+        "subjects": [
+          "Physics",
+          "Chemistry"
+        ]
+      },
+      "stats": {
+        "streak": 3,
+        "watchTime": 120,
+        "bookmarks": 2,
+        "quizzesTaken": 3
+      },
+      "lastLogin": "2026-06-18T19:13:38.482Z",
+      "refreshToken": null
+    },
+    {
+      "_id": "mock-user-2",
+      "name": "Rohan Admin",
+      "email": "admin@eduverse.ai",
+      "password": "rohan@123",
+      "role": "admin",
+      "preferences": {
+        "exam": "GATE",
+        "subjects": [
+          "Computer Science"
+        ]
+      },
+      "stats": {
+        "streak": 5,
+        "watchTime": 450,
+        "bookmarks": 5,
+        "quizzesTaken": 8
+      }
+    },
+    {
+      "isActive": true,
+      "_id": "mock-5fe6aw5",
+      "createdAt": "2026-06-18T19:00:45.828Z",
+      "updatedAt": "2026-06-18T19:00:45.828Z",
+      "name": "Rohan",
+      "email": "rohans05682@gmail.com",
+      "password": "123456",
+      "role": "student",
+      "preferences": {
+        "exam": "GATE",
+        "subjects": [
+          "Computer Science"
+        ]
+      },
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im1vY2stNWZlNmF3NSIsImlhdCI6MTc4MTgxMDI5OSwiZXhwIjoxNzgyNDE1MDk5fQ.dV2wXoUUy83SRsRkf64Kf9toSI-LWFD8rT997t4GHF0",
+      "lastLogin": "2026-06-18T19:18:19.216Z"
+    }
+  ],
+  "Note": [
+    {
+      "_id": "mock-xquwh10",
+      "createdAt": "2026-06-18T19:06:52.349Z",
+      "updatedAt": "2026-06-18T19:06:52.349Z",
+      "videoId": "standalone",
+      "videoTitle": "thermodynamic",
+      "type": "short",
+      "content": "As an expert educational tutor, here are concise notes on \"Thermodynamics\" to help you study effectively!\n\n---\n\n## Thermodynamics\n\n*   **Definition:** The branch of physics and chemistry that deals with **heat** and its relationship to **other forms of energy and work**.\n*   Studies how energy is transformed and transferred in physical and chemical systems, determining the **feasibility** and **direction** of processes.\n\n### Key Concepts in Thermodynamics\n\n#### 1. System and Surroundings\n*   **System:** The specific part of the universe under observation.\n*   **Surroundings:** Everything outside the system that can interact with it.\n*   **Boundary:** The real or imaginary surface separating the system from its surroundings.\n\n#### 2. Types of Systems\n*   **Open System:** Exchanges both **mass** and **energy** with the surroundings.\n    *   *Example:* An open pot of boiling water.\n*   **Closed System:** Exchanges **energy** but **not mass** with the surroundings.\n    *   *Example:* A sealed pressure cooker.\n*   **Isolated System:** Exchanges neither **mass** nor **energy** with the surroundings (an ideal concept).\n    *   *Example:* A perfectly insulated thermos flask.\n\n#### 3. State Variables (Properties)\n*   Properties that describe the **state** of a system at a given moment.\n*   **Intensive Properties:** Independent of the amount of substance.\n    *   *Examples:* **Temperature (T)**, **Pressure (P)**, **Density**.\n*   **Extensive Properties:** Dependent on the amount of substance.\n    *   *Examples:* **Volume (V)**, **Mass (m)**, **Internal Energy (U)**.\n\n#### 4. Thermodynamic Processes\n*   A change in the **state** of a system.\n*   **Isothermal Process:** Occurs at constant **temperature (T)**.\n*   **Isobaric Process:** Occurs at constant **pressure (P)**.\n*   **Isochoric Process:** Occurs at constant **volume (V)**.\n*   **Adiabatic Process:** No **heat** exchange with the surroundings (Q = 0).\n*   **Cyclic Process:** A series of processes that returns the system to its initial state.\n\n#### 5. Energy in Thermodynamics\n*   **Internal Energy (U):** The total energy contained within a system (kinetic + potential energy of its molecules).\n*   **Heat (Q):** Energy transferred due to a **temperature difference**.\n    *   Flows from hotter to colder regions.\n*   **Work (W):** Energy transferred due to a **force acting over a distance**.\n    *   *Example:* Expansion/compression work (PV work) in a piston.\n\n### Laws of Thermodynamics\n\n#### 1. Zeroth Law of Thermodynamics\n*   If two systems are each in thermal equilibrium with a third system, they are also in thermal equilibrium with each other.\n*   This law forms the basis for defining **temperature** and using thermometers.\n\n#### 2. First Law of Thermodynamics\n*   **Conservation of Energy:** Energy cannot be created or destroyed, only transformed from one form to another.\n*   Mathematically: **ΔU = Q - W**\n    *   **ΔU:** Change in internal energy of the system.\n    *   **Q:** Heat added to the system.\n    *   **W:** Work done *by* the system.\n\n#### 3. Second Law of Thermodynamics\n*   The **entropy** of an isolated system never decreases over time; it tends to increase or remain constant.\n*   Heat cannot spontaneously flow from a colder body to a hotter body.\n*   Indicates the **direction** of spontaneous processes and the **quality** of energy.\n*   **Entropy (S):** A measure of the **disorder** or **randomness** in a system.\n\n#### 4. Third Law of Thermodynamics\n*   As a system approaches **absolute zero temperature (0 Kelvin)**, the **entropy** of the system approaches a constant minimum value.\n*   It is impossible to reach absolute zero in a finite number of steps.\n\n### Importance and Applications\n*   Fundamental to understanding engines, refrigerators, power generation, chemical reactions, and biological processes.\n*   Helps engineers design efficient machines and scientists predict reaction outcomes.",
+      "aiGenerated": true
+    }
+  ],
+  "Playlist": [],
+  "Bookmark": [],
+  "SearchHistory": [
+    {
+      "_id": "mock-f2s84kk",
+      "createdAt": "2026-06-18T19:03:55.059Z",
+      "updatedAt": "2026-06-18T19:03:55.059Z",
+      "query": "newton laws of motion",
+      "filters": {},
+      "resultCount": 12
+    },
+    {
+      "_id": "mock-b74cy0u",
+      "createdAt": "2026-06-18T19:03:55.939Z",
+      "updatedAt": "2026-06-18T19:03:55.939Z",
+      "query": "newton laws of motion",
+      "filters": {},
+      "resultCount": 12
+    },
+    {
+      "_id": "mock-uf9rfia",
+      "createdAt": "2026-06-18T19:05:16.050Z",
+      "updatedAt": "2026-06-18T19:05:16.050Z",
+      "query": "Electrostatics",
+      "filters": {
+        "exam": "NEET"
+      },
+      "resultCount": 12
+    },
+    {
+      "_id": "mock-7j0lg8e",
+      "createdAt": "2026-06-18T19:16:43.276Z",
+      "updatedAt": "2026-06-18T19:16:43.276Z",
+      "query": "Electrostatics",
+      "filters": {
+        "exam": "UPSC"
+      },
+      "resultCount": 12
+    },
+    {
+      "_id": "mock-tmxzjgk",
+      "createdAt": "2026-06-18T19:22:24.178Z",
+      "updatedAt": "2026-06-18T19:22:24.178Z",
+      "query": "Organic Chemistry",
+      "filters": {},
+      "resultCount": 12
+    }
+  ],
+  "QuizResult": [],
+  "Discussion": [],
+  "Notification": [],
+  "Progress": []
+}

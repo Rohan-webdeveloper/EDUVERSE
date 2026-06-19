@@ -26,3 +26,6 @@ Thumbs.db
 # Misc
 *.bak
 *.tmp
+deploy_env.ps1
+
+.vercel

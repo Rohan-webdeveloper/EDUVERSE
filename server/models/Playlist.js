@@ -38,4 +38,6 @@ playlistSchema.pre('save', function (next) {
   next();
 });
 
-module.exports = mongoose.model('Playlist', playlistSchema);
+const Playlist = mongoose.model('Playlist', playlistSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(Playlist, 'Playlist');

@@ -27,4 +27,6 @@ const noteSchema = new mongoose.Schema({
 noteSchema.index({ userId: 1, videoId: 1 });
 noteSchema.index({ userId: 1, subject: 1 });
 
-module.exports = mongoose.model('Note', noteSchema);
+const Note = mongoose.model('Note', noteSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(Note, 'Note');

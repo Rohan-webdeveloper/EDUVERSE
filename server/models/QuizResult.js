@@ -29,4 +29,6 @@ const quizResultSchema = new mongoose.Schema({
 
 quizResultSchema.index({ userId: 1, createdAt: -1 });
 
-module.exports = mongoose.model('QuizResult', quizResultSchema);
+const QuizResult = mongoose.model('QuizResult', quizResultSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(QuizResult, 'QuizResult');

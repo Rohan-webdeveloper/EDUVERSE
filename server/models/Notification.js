@@ -22,4 +22,6 @@ const notificationSchema = new mongoose.Schema({
 
 notificationSchema.index({ userId: 1, read: 1 });
 
-module.exports = mongoose.model('Notification', notificationSchema);
+const Notification = mongoose.model('Notification', notificationSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(Notification, 'Notification');

@@ -34,4 +34,6 @@ const discussionSchema = new mongoose.Schema({
 discussionSchema.index({ subject: 1, exam: 1 });
 discussionSchema.index({ createdAt: -1 });
 
-module.exports = mongoose.model('Discussion', discussionSchema);
+const Discussion = mongoose.model('Discussion', discussionSchema);
+const { wrapModel } = require('../utils/mockDb');
+module.exports = wrapModel(Discussion, 'Discussion');
