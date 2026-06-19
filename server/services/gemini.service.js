@@ -6,12 +6,34 @@ const getGenAI = () => {
   return genAI;
 };
 
+const MODELS_TO_TRY = [
+  'gemini-3.1-flash-lite',
+  'gemini-2.5-flash-lite',
+  'gemini-2.5-flash',
+  'gemini-3.5-flash'
+];
+
 const getModel = (jsonMode = false) => {
-  const options = { model: 'gemini-2.5-flash' };
-  if (jsonMode) {
-    options.generationConfig = { responseMimeType: 'application/json' };
-  }
-  return getGenAI().getGenerativeModel(options);
+  return {
+    generateContent: async (prompt) => {
+      let lastError;
+      for (const modelName of MODELS_TO_TRY) {
+        try {
+          const options = { model: modelName };
+          if (jsonMode) {
+            options.generationConfig = { responseMimeType: 'application/json' };
+          }
+          const model = getGenAI().getGenerativeModel(options);
+          const result = await model.generateContent(prompt);
+          return result;
+        } catch (error) {
+          console.warn(`Gemini model ${modelName} failed, trying next fallback. Error:`, error.message);
+          lastError = error;
+        }
+      }
+      throw new Error(`All Gemini fallback models failed. Last error: ${lastError?.message}`);
+    }
+  };
 };
 
 /**
