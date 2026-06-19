@@ -79,6 +79,10 @@ export default function ProfilePage() {
               <input className="form-input" value={name} onChange={e => setName(e.target.value)} />
             </div>
             <div className="form-group">
+              <label className="form-label">Email Address</label>
+              <input className="form-input" value={user?.email || ''} readOnly disabled style={{ opacity: 0.6, cursor: 'not-allowed', backgroundColor: 'var(--bg-secondary)' }} />
+            </div>
+            <div className="form-group">
               <label className="form-label">Preparing for</label>
               <select className="form-input" value={exam} onChange={e => setExam(e.target.value)}>
                 <option value="">Select exam</option>

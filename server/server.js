@@ -63,10 +63,14 @@ app.use(preventKeyLeak);
 // ━━━━━━━━━━━━━━━━━━━━━━
 // GOOGLE OAUTH SETUP
 // ━━━━━━━━━━━━━━━━━━━━━━
+const googleClientId = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_ID !== 'your_google_client_id' ? process.env.GOOGLE_CLIENT_ID : 'dummy-google-client-id';
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET && process.env.GOOGLE_CLIENT_SECRET !== 'your_google_client_secret' ? process.env.GOOGLE_CLIENT_SECRET : 'dummy-google-client-secret';
+const googleCallbackUrl = process.env.GOOGLE_CALLBACK_URL || 'http://localhost:5001/api/auth/google/callback';
+
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: process.env.GOOGLE_CALLBACK_URL,
+  clientID: googleClientId,
+  clientSecret: googleClientSecret,
+  callbackURL: googleCallbackUrl,
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await User.findOne({ googleId: profile.id });
